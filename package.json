@@ -1,0 +1,39 @@
+{
+  "name": "@shirtiny/logger",
+  "version": "1.0.4",
+  "description": "simple console log on browser, use css like styled-components",
+  "main": "dist/index.js",
+  "author": {
+    "name": "Shirtiny",
+    "email": "shirtiny@gmail.com"
+  },
+  "keywords": [
+    "consloe",
+    "log",
+    "js",
+    "javaScript",
+    "shirtiny"
+  ],
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@babel/plugin-transform-runtime": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@rollup/plugin-babel": "^5.2.3",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "rollup": "^2.38.4",
+    "rollup-plugin-filesize": "^9.1.0",
+    "rollup-plugin-uglify": "^6.0.4"
+  }
+}
