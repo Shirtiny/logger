@@ -1,6 +1,6 @@
 {
   "name": "@shirtiny/logger",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "simple console log on browser, use css like styled-components",
   "main": "dist/index.js",
   "author": {
@@ -19,7 +19,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup --config rollup.config.dev.js",
+    "pro": "rollup -c"
   },
   "dependencies": {},
   "devDependencies": {
@@ -29,6 +30,7 @@
     "@babel/preset-env": "^7.12.13",
     "@rollup/plugin-babel": "^5.2.3",
     "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
