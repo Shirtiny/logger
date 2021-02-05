@@ -1,9 +1,10 @@
-import logger from "./logger";
 import Logger from "./model/logger";
+import { css } from "./style";
 
 const ShLog = {
-  logger,
-  test: new Logger(),
+  logger: new Logger(),
 };
+
+export { Logger, css };
 
 export default ShLog;
