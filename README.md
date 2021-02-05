@@ -50,12 +50,12 @@ logger.error(new Error("error message"), { level: 0 });
 
 ```js
 const logger = new Logger({
-  // your console implement, default : window.console 
+  // your console implement, default window.console 
   console,
   // enable logger, default true  
-  enable: true,
+  enable,
   // logger level , default 4  
-  level: 4,
+  level,
 });
 
 // logger levels
