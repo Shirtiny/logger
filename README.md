@@ -74,3 +74,38 @@ const Levels = {
 
 ## Custom
 
+> tips: I recommend installing and enabling the vscode-styled-components for vscode.
+
+```js
+import { Logger, css } from "@shirtiny/logger";
+
+const customLogsCreater = (log, option) => {
+  return {
+    custom: (message, ...data) => {
+      // level
+      if (option.level < 2) return;
+      //   log
+      return log(
+        `%c Custom %c${message}`,
+        css`
+          color: #fff;
+          padding: 2px;
+          background-color: #3f6600;
+          border-radius: 3px;
+          margin-right: 8px;
+        `,
+        css`
+          color: #3f6600;
+          font-size: 15px;
+          font-family: 'Trebuchet MS';
+        `,
+        ...data
+      );
+    },
+  };
+};
+
+const logger = new Logger({ level: 2 }, customLogsCreater);
+logger.custom("my custom log");
+```
+

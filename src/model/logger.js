@@ -16,9 +16,10 @@ const Levels = {
 class Logger extends Console {
   constructor(option, customLogs = (log, option) => {}) {
     super(option);
-    for (const key in customLogs(this.log, this.option)) {
-      if (Object.hasOwnProperty.call(customLogs, key)) {
-        this[key] = customLogs[key];
+    const coustoms = customLogs(this.log, this.option);
+    for (const key in coustoms) {
+      if (Object.hasOwnProperty.call(coustoms, key)) {
+        this[key] = coustoms[key];
       }
     }
   }
