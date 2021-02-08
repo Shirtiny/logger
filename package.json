@@ -1,6 +1,6 @@
 {
   "name": "@shirtiny/logger",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "simple console log on browser, use css like styled-components",
   "main": "dist/index.js",
   "author": {
@@ -19,7 +19,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rollup --config rollup.config.dev.js",
+    "dev": "rollup --config rollup.config.dev.js",
     "pro": "rollup -c"
   },
   "dependencies": {},
