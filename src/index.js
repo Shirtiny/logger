@@ -1,4 +1,4 @@
-import Logger from "./model/logger";
+import Logger from "./log/logger";
 import { css } from "./style";
 
 const ShLog = {

@@ -19,14 +19,15 @@ const customLogsCreater = (log, option) => {
         css`
           color: #3f6600;
           font-size: 15px;
-          font-family: 'Trebuchet MS';
+          font-family: "Trebuchet MS";
         `,
         ...data
       );
     },
   };
 };
-const logger = new Logger({ level: 2 }, customLogsCreater);
+// const logger = new Logger({ level: 2 }, customLogsCreater);
+const logger = new Logger();
 
 logger.version(name, version, { level: 0 });
 logger.log("log", { level: 0 }, ", logger default options: ", logger.option);
@@ -38,4 +39,4 @@ logger.interval("interval task", { level: 1 });
 logger.key("ENTER", { level: 0 });
 logger.warn("warnning message", { level: 1 });
 logger.error(new Error("error message"), { level: 0 });
-logger.custom("my custom log");
+// logger.custom("my custom log");
