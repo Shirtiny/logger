@@ -2,6 +2,12 @@ import style, { selectCss } from "../style";
 import theme from "../theme";
 import Console from "./console";
 
+const DefaultOption = {
+  console: window.console,
+  enable: true,
+  level: 4,
+};
+
 const Levels = {
   version: 0,
   error: 0,
@@ -28,7 +34,7 @@ const TypesMap = new Map([
     "http",
     {
       name: "http",
-      title: " Hebug ",
+      title: " Http ",
       color: theme.weakBlue,
       level: Levels.http,
     },
@@ -76,7 +82,7 @@ const Types = Array.from(TypesMap.values());
 console.log(Types);
 
 class Logger extends Console {
-  constructor(option, customLogs = (log, option) => {}) {
+  constructor(option = DefaultOption, customLogs = (log, option) => {}) {
     super(option);
 
     for (const type of Types) {

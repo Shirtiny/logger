@@ -1,14 +1,13 @@
 const _option = new WeakMap();
 
-const DefaultOption = {
+const DefaultConsoleOption = {
   console: window.console,
   enable: true,
-  level: 4,
 };
 
 class Console {
   constructor(option = {}) {
-    _option.set(this, { ...DefaultOption, ...option });
+    _option.set(this, { ...DefaultConsoleOption, ...option });
   }
 
   log = (...message) => {
