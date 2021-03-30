@@ -1,6 +1,10 @@
 {
   "name": "@shirtiny/logger",
-  "version": "1.2.2",
+  "version": "1.2.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shirtiny/logger"
+  },
   "description": "simple console log on browser, use css like styled-components",
   "main": "dist/index.js",
   "author": {
