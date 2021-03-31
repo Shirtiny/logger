@@ -19,7 +19,8 @@
     "shirtiny"
   ],
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "license": "MIT",
   "scripts": {
