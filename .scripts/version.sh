@@ -3,11 +3,11 @@
 ###
 # @Author: Shirtiny
 # @Date: 2021-06-25 12:13:58
- # @LastEditTime: 2021-06-25 14:28:58
+ # @LastEditTime: 2021-06-25 16:23:54
 # @Description:
 ###
 
-set -e
+# set -e
 
 error() {
   echo "🚨 $1"

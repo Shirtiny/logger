@@ -6,3 +6,6 @@
  */
 
 export * from "./main";
+
+import * as shLogger from "./main";
+export default shLogger;
