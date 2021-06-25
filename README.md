@@ -6,7 +6,7 @@
 
 ## Introduction
 
-> simple console log with color.
+> simple console log with css, write in typescript.
 
 ![preview](https://user-images.githubusercontent.com/49592759/107003893-72ad1d00-67c8-11eb-9d91-afa1353c221d.png)
 
@@ -26,86 +26,102 @@ yarn add @shirtiny/logger
 
 ## Usage
 
-```js
-import { Logger } from "@shirtiny/logger";
+```typescript
+import logger, { LEVELS } from "@shirtiny/logger";
+import { name, version } from "../package.json";
 
-const logger = new Logger();
+logger.version(name, version, { level: LEVELS.version });
 
-logger.version("project name", "1.0.1", {
-  level: 0,
-});
+logger.log(
+  "log",
+  { level: LEVELS.log },
+  ", logger default options: ",
+  logger.getLoggerOption(),
+);
 
-logger.log("log", { level: 0 }, ", logger default options: ", logger.option);
-logger.debug("debug message", { level: 4 });
-logger.http("req and rep", { level: 3 });
-logger.api("api message", { level: 3 });
-logger.service("service data", { level: 2 });
-logger.interval("interval task", { level: 1 });
-logger.key("ENTER", { level: 0 });
-logger.warn("warnning message", { level: 1 });
-logger.error(new Error("error message"), { level: 0 });
+logger.debug("debug message", { level: LEVELS.debug });
+logger.http("req and rep", { level: LEVELS.http });
+logger.api("api message", { level: LEVELS.api });
+logger.service("service data", { level: LEVELS.service });
+logger.interval("interval task", { level: LEVELS.interval });
+logger.key("ENTER", { level: LEVELS.key });
+logger.warn("warnning message", { level: LEVELS.warn });
+logger.error(new Error("error message"), { level: LEVELS.error });
+
+// disable log
+logger.setEnable(false);
+// change log level
+logger.setLevel(39);
 ```
 
 ## Options
 
-```js
-const logger = new Logger({
-  // your console implement, default window.console 
-  console,
+```typescript
+import { theme, ShLogger } from "@shirtiny/logger";
+
+const logger = new ShLogger({
   // enable logger, default true  
-  enable,
-  // logger level , default 4  
-  level,
+  enable: true,
+  // logger level , default 39  
+  level: 3,
+  // log shape style , default slider theme  
+  shape: theme.shapes.slider,
+  // your log implement, default window.console.log 
+  log: (...data) => console.log(...data),
 });
 
 // logger levels
-const Levels = {
-  version: 0,
-  error: 0,
-  key: 0,
-  warn: 1,
-  interval: 1,
-  service: 2,
-  api: 3,
-  http: 3,
-  debug: 4,
-};
+enum LEVELS {
+  log = 0,
+  version = 0,
+  error = 0,
+  key = 0,
+  warn = 1,
+  interval = 1,
+  service = 2,
+  api = 3,
+  http = 3,
+  debug = 3,
+}
 ```
 
 ## Custom
 
-> tips: I recommend installing and enabling the vscode-styled-components for vscode.
+> tips: It is recommended to install the vscode-styled-components for vscode.
 
-```js
+```typescript
 import { Logger, css } from "@shirtiny/logger";
 
-const customLogsCreater = (log, option) => {
-  return {
-    custom: (message, ...data) => {
-      // level
-      if (option.level < 2) return;
-      //   log
-      return log(
-        `%c Custom %c${message}`,
-        css`
-          color: #fff;
-          padding: 2px;
-          background-color: #3f6600;
-          border-radius: 3px;
-          margin-right: 8px;
-        `,
-        css`
-          color: #3f6600;
-          font-size: 15px;
-          font-family: 'Trebuchet MS';
-        `,
-        ...data
-      );
-    },
+// Or extends ShLogger if you like.
+export class CustomerLogger extends Logger {
+    
+  custom = (message: string, ...data: any[]) => {
+    // console.log(this);  
+    const level = 4;
+    this.formatLog(
+      level,
+      " Custom ",
+      message,
+      css`
+        color: #fff;
+        padding: 2px;
+        background-color: #3f6600;
+        border-radius: 3px;
+        margin-right: 8px;
+      `,
+      css`
+        color: #3f6600;
+        font-size: 15px;
+        font-family: "Trebuchet MS";
+      `,
+      ...data,
+    );
   };
-};
+    
+}
 
-const logger = new Logger({ level: 2 }, customLogsCreater);
-logger.custom("my custom log");
+const customerLogger = new CustomerLogger();
+
+customerLogger.custom("my custom log");
 ```
 

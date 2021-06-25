@@ -1,7 +1,15 @@
-.vscode 
-.idea
-/node_modules
-/dist
-/test
+node_modules
+dist
+tsc
+*.tgz
 
-yarn-error.log
+.DS_Store
+.vscode
+.idea
+pkg
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
