@@ -5,7 +5,8 @@
  * @Description:
  */
 
+import logger from "./main";
+
 export * from "./main";
 
-import * as shLogger from "./main";
-export default shLogger;
+export default logger;
