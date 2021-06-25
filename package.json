@@ -1,6 +1,6 @@
 {
   "name": "@shirtiny/logger",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Simple console log with css, write in typescript.",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/cli.js",
