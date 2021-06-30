@@ -1,9 +1,9 @@
 {
   "name": "@shirtiny/logger",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Simple console log with css, write in typescript.",
   "types": "./dist/types/main.d.ts",
-  "main": "./dist/cli.js",
+  "main": "./dist/main.es.js",
   "browser": "./dist/main.browser.js",
   "module": "./dist/main.es.js",
   "exports": {
