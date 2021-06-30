@@ -127,4 +127,4 @@ customerLogger.custom("my custom log");
 
 ## Versions
 - v1.2.4 JavaScript
-- v2.*.*  TypeScript
+- v2.1.3  TypeScript
