@@ -3,13 +3,13 @@
   "version": "2.1.4",
   "description": "Simple console log with css, write in typescript.",
   "types": "./dist/types/main.d.ts",
-  "main": "./dist/main.browser.js",
+  "main": "./dist/cli.js",
   "browser": "./dist/main.browser.js",
-  "module": "./dist/main.browser.js",
+  "module": "./dist/main.es.js",
   "exports": {
     ".": {
-      "import": "./dist/main.browser.js",
-      "require": "./dist/main.browser.js"
+      "import": "./dist/main.es.js",
+      "require": "./dist/cli.js"
     }
   },
   "bin": "./dist/cli.js",
@@ -27,8 +27,8 @@
     "clean": "shx rm -rf dist build",
     "ts-node": "ts-node",
     "build-all": "npm run clean && npm run build && npm run esbuild-node && npm run esbuild-browser && npm run esbuild-esm",
-    "esbuild-browser": "esbuild src/browser.ts --platform=browser --global-name=shirtinyLogger --bundle --minify --outfile=dist/main.browser.js",
-    "esbuild-browser:dev": "esbuild src/browser.ts --platform=browser --global-name=shirtinyLogger --bundle  --sourcemap=external --outfile=dist/main.browser.js",
+    "esbuild-browser": "esbuild src/browser.ts --platform=browser --global-name=ShirtinyLogger --bundle --minify --outfile=dist/main.browser.js",
+    "esbuild-browser:dev": "esbuild src/browser.ts --platform=browser --global-name=ShirtinyLogger --bundle  --sourcemap=external --outfile=dist/main.browser.js",
     "esbuild-node": "esbuild src/cli.ts --bundle --platform=node --minify --outfile=dist/cli.js",
     "esbuild-node:dev": "esbuild src/cli.ts --bundle --platform=node --sourcemap=external --outfile=dist/cli.js",
     "esbuild-esm": "esbuild src/es.ts --platform=neutral --bundle --minify --outfile=dist/main.es.js",
