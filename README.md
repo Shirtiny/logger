@@ -125,3 +125,6 @@ const customerLogger = new CustomerLogger();
 customerLogger.custom("my custom log");
 ```
 
+## Versions
+- v1.2.4 JavaScript
+- >= v2  Typescropt
