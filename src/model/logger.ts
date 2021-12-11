@@ -5,7 +5,7 @@ import { ILog } from "./baseLogger";
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-24 14:47:10
- * @LastEditTime: 2021-06-25 14:13:37
+ * @LastEditTime: 2021-12-11 11:12:12
  * @Description:
  */
 
@@ -67,7 +67,7 @@ export class Logger extends BaseLogger {
     this.loggerOption.level = level;
   }
 
-  formatLog(
+  protected formatLog(
     level: number,
     title: string,
     message: string,

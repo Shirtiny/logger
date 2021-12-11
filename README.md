@@ -18,7 +18,7 @@
 npm i @shirtiny/logger
 ```
 
- **use yarn**
+**use yarn**
 
 ```
 yarn add @shirtiny/logger
@@ -60,13 +60,13 @@ logger.setLevel(39);
 import { theme, ShLogger } from "@shirtiny/logger";
 
 const logger = new ShLogger({
-  // enable logger, default true  
+  // enable logger, default true
   enable: true,
-  // logger level , default 39  
+  // logger level , default 39
   level: 3,
-  // log shape style , default slider theme  
+  // log shape style , default slider theme
   shape: theme.shapes.slider,
-  // your log implement, default window.console.log 
+  // your log implement, default window.console.log
   log: (...data) => console.log(...data),
 });
 
@@ -89,14 +89,37 @@ enum LEVELS {
 
 > tips: It is recommended to install the vscode-styled-components for vscode.
 
+- extends ShLogger for custom
+
+```typescript
+import { ShLogger } from "@shirtiny/logger";
+
+class CustomerLogger extends ShLogger {
+  custom = (message: string, ...data: any[]) => {
+    this.formatShapeLog(
+      {
+        level: 4, // the level of this log method
+        title: " CUSTOM :",
+        color: "#3f6600",
+      },
+      message,
+      data,
+    );
+  };
+}
+
+const customLogger = new CustomerLogger();
+
+customLogger.custom("custom message", { data: "any data" });
+```
+
+- full custom (if don't need ShLogger's method)
+
 ```typescript
 import { Logger, css } from "@shirtiny/logger";
 
-// Or extends ShLogger if you like.
-export class CustomerLogger extends Logger {
-    
+class FullCustomerLogger extends Logger {
   custom = (message: string, ...data: any[]) => {
-    // console.log(this);  
     const level = 4;
     this.formatLog(
       level,
@@ -117,14 +140,14 @@ export class CustomerLogger extends Logger {
       ...data,
     );
   };
-    
 }
 
-const customerLogger = new CustomerLogger();
+const customerLogger = new FullCustomerLogger();
 
 customerLogger.custom("my custom log");
 ```
 
 ## Versions
+
 - 1.2.4 JavaScript
-- ^2.1.7  TypeScript
+- ^2.1.7 TypeScript

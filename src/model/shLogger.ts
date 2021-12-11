@@ -1,12 +1,13 @@
-import { css, selectCss, DUTY } from "./../style/index";
-import { Colors } from "./../style/theme";
-import { Logger } from "./logger";
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 10:25:33
- * @LastEditTime: 2021-06-25 11:51:43
+ * @LastEditTime: 2021-12-11 11:18:34
  * @Description:
  */
+
+import { css, selectCss, DUTY } from "../style/index";
+import { Colors } from "../style/theme";
+import { Logger } from "./logger";
 
 export enum LEVELS {
   log = 0,
@@ -89,52 +90,59 @@ const logTypes: ILogTypes = {
 };
 
 export class ShLogger extends Logger {
-  formatLogWrapper(type: LogType | undefined, message: string, ...data: any[]) {
-    if (!type) return;
+  protected formatShapeLog(
+    {
+      level,
+      title,
+      color,
+    }: {
+      level: number;
+      title: string;
+      color: string;
+    },
+    message: string,
+    ...data: any[]
+  ) {
     this.formatLog(
-      type.level,
-      type.title,
+      level,
+      title,
       message,
-      selectCss(
-        { color: type.color },
-        this.getLoggerOption().shape,
-        DUTY.title,
-      ),
-      selectCss(
-        { color: type.color },
-        this.getLoggerOption().shape,
-        DUTY.message,
-      ),
+      selectCss({ color }, this.getLoggerOption().shape, DUTY.title),
+      selectCss({ color }, this.getLoggerOption().shape, DUTY.message),
       ...data,
     );
   }
 
   debug(message: string, ...data: any[]) {
-    this.formatLogWrapper(logTypes.debug, message, ...data);
+    this.formatShapeLog(logTypes.debug, message, ...data);
   }
 
   http(message: string, ...data: any[]) {
-    this.formatLogWrapper(logTypes.http, message, ...data);
+    this.formatShapeLog(logTypes.http, message, ...data);
   }
 
   api(message: string, ...data: any[]) {
-    this.formatLogWrapper(logTypes.api, message, ...data);
+    this.formatShapeLog(logTypes.api, message, ...data);
   }
 
   service(message: string, ...data: any[]) {
-    this.formatLogWrapper(logTypes.service, message, ...data);
+    this.formatShapeLog(logTypes.service, message, ...data);
   }
 
   interval(message: string, ...data: any[]) {
-    this.formatLogWrapper(logTypes.interval, message, ...data);
+    this.formatShapeLog(logTypes.interval, message, ...data);
   }
 
   warn(message: string, ...data: any[]) {
-    this.formatLogWrapper(logTypes.warn, message, ...data);
+    this.formatShapeLog(logTypes.warn, message, ...data);
   }
 
-  error = (error: Error, ...data: any[]) => {
-    this.formatLogWrapper(logTypes.error, `${error.stack}\n`, ...data);
+  error = (error: any | unknown, ...data: any[]) => {
+    this.formatShapeLog(
+      logTypes.error,
+      `${error instanceof Error ? error.stack : error}\n`,
+      ...data,
+    );
   };
 
   key = (keyName: string, ...data: any[]) => {
