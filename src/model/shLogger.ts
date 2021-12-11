@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 10:25:33
- * @LastEditTime: 2021-12-11 11:18:34
+ * @LastEditTime: 2021-12-11 11:51:37
  * @Description:
  */
 
@@ -137,7 +137,7 @@ export class ShLogger extends Logger {
     this.formatShapeLog(logTypes.warn, message, ...data);
   }
 
-  error = (error: any | unknown, ...data: any[]) => {
+  error = (error: any, ...data: any[]) => {
     this.formatShapeLog(
       logTypes.error,
       `${error instanceof Error ? error.stack : error}\n`,
