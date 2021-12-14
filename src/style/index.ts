@@ -2,19 +2,21 @@ import { Shape, Slider } from "./shape";
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-23 16:31:16
- * @LastEditTime: 2021-06-24 22:57:31
+ * @LastEditTime: 2021-12-14 15:21:11
  * @Description:
  */
 
-export const css = (
-  literals: TemplateStringsArray,
-  ...values: Array<string | number>
-) => {
-  // 模板字符串无变量时 values为空数组 literals数组只有一个值 是模版字符串本身
-  if (values.length === 0) {
-    return literals[0];
-  }
+type Text = string | number;
 
+const line = (str?: string) => {
+  return str ? str.replace(/\s*(;|\{|\})+\s*[\n\r]*/g, "$1") : "";
+};
+
+export const css = (literals: TemplateStringsArray, ...values: Text[]) => {
+  // 模板字符串无变量时 values为空数组 literals数组只有一个值 是模版字符串本身
+  if (!values.length) {
+    return line(literals[0]);
+  }
   let cssStr: string = "";
 
   values.forEach((value, index) => {
@@ -22,7 +24,7 @@ export const css = (
   });
   // literals总比values多一个 遍历values完毕后 还剩一个literal没有加上
   cssStr += literals[literals.length - 1];
-  return cssStr;
+  return line(cssStr);
 };
 
 type cssParam = {
