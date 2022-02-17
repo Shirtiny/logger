@@ -1,7 +1,7 @@
 /*
  * @Author: Shirtiny
  * @Date: 2021-06-25 10:25:33
- * @LastEditTime: 2021-12-11 11:51:37
+ * @LastEditTime: 2022-02-17 21:47:39
  * @Description:
  */
 
@@ -12,14 +12,14 @@ import { Logger } from "./logger";
 export enum LEVELS {
   log = 0,
   version = 0,
-  error = 0,
-  key = 0,
-  warn = 1,
-  interval = 1,
-  service = 2,
-  api = 3,
-  http = 3,
-  debug = 3,
+  error = 1,
+  warn = 2,
+  key = 3,
+  interval = 3,
+  service = 4,
+  api = 5,
+  http = 6,
+  debug = 7,
 }
 
 type LogType = {
