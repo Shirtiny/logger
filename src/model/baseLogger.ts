@@ -22,18 +22,12 @@ export class BaseLogger implements ILogger {
   private _option: IBaseLoggerOption;
 
   constructor(option?: IBaseLoggerOption) {
-    const DefaultOption: IBaseLoggerOption = {
-      log: window.console.log,
-      enable: true,
-    };
-
     this._option = {
-      ...DefaultOption,
       enable:
         typeof option?.enable === "boolean"
           ? option.enable
-          : DefaultOption.enable,
-      log: option?.log || DefaultOption.log,
+          : true,
+      log: option?.log,
     };
   }
 
