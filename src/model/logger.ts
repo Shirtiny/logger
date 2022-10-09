@@ -25,7 +25,7 @@ class LoggerOption implements IBaseLoggerOption {
   constructor(param?: LoggerOptionParam) {
     const defaultOptionParam = {
       enable: true,
-      log: window?.console?.log,
+      log: (...args: any) => window?.console?.log(...args),
       // miku!
       level: 39,
       shape: new Theme().shapes.slider,
