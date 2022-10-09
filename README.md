@@ -103,7 +103,7 @@ class CustomerLogger extends ShLogger {
         color: "#3f6600",
       },
       message,
-      data,
+      ...data,
     );
   };
 }
