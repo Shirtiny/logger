@@ -48,8 +48,8 @@ export class Logger extends BaseLogger {
   private loggerOption: LoggerOption;
 
   constructor(options?: LoggerOption) {
-    super(options || new LoggerOption());
-    this.loggerOption = { ...new LoggerOption(), ...options };
+    super(new LoggerOption(options));
+    this.loggerOption = new LoggerOption();
   }
 
   setLoggerOption(option: object) {
