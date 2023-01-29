@@ -75,12 +75,12 @@ export class Logger extends BaseLogger {
 
   protected customFormat(
     level: number,
-    pairs: {str: string, style: string}[],
+    pairs: {str: string, style?: string}[],
     ...data: any[]
   ) {
     if (!this.isLevelAllowed(level)) return;
     const content = "%c" + pairs.map((p) => p.str).join("%c");
-    const descStyles = pairs.map((p) => p.style)
+    const descStyles = pairs.map((p) => p.style);
     super.log(content, ...descStyles, ...data);
   }
 
