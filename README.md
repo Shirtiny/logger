@@ -92,7 +92,7 @@ enum LEVELS {
 - extends ShLogger for custom
 
 ```typescript
-import { ShLogger } from "@shirtiny/logger";
+import { ShLogger, css } from "@shirtiny/logger";
 
 class CustomerLogger extends ShLogger {
   custom = (message: string, ...data: any[]) => {
@@ -106,6 +106,59 @@ class CustomerLogger extends ShLogger {
       ...data,
     );
   };
+  
+  custom2 = (message: string, ...data: any[]) => {
+    const level = 4;
+    this.formatLog(
+      level,
+      " Custom ",
+      message,
+      // style for " Custom ",
+      css`
+        color: #fff;
+        padding: 2px;
+        background-color: #3f6600;
+        border-radius: 3px;
+        margin-right: 8px;
+      `,
+      // style for message,
+      css`
+        color: #3f6600;
+        font-size: 15px;
+        font-family: "Trebuchet MS";
+      `,
+      ...data,
+    );
+  };
+  
+  custom3 = (message: string, ...data: any[]) => {
+    const level = 4;
+    this.customFormat(
+      level,
+      [
+        {
+        str:  " Custom ",
+        style: css`
+          color: #fff;
+          padding: 2px;
+          background-color: #3f6600;
+          border-radius: 3px;
+          margin-right: 8px;
+        `,
+        },
+        {
+        str:  message,
+        style: css`
+          color: #3f6600;
+          font-size: 15px;
+          font-family: "Trebuchet MS";
+        `,
+        }
+      ]
+      ...data,
+    );
+  };
+  
 }
 
 const customLogger = new CustomerLogger();
