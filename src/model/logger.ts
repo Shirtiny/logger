@@ -48,8 +48,9 @@ export class Logger extends BaseLogger {
   private loggerOption: LoggerOption;
 
   constructor(options?: LoggerOption) {
-    super(new LoggerOption(options));
-    this.loggerOption = new LoggerOption();
+    const option = new LoggerOption(options);
+    super(option);
+    this.loggerOption = option;
   }
 
   setLoggerOption(option: object) {
@@ -67,7 +68,7 @@ export class Logger extends BaseLogger {
     this.loggerOption.level = level;
   }
 
-  isLevelAllowed( level: number,) {
+  isLevelAllowed(level: number) {
     if (!this.loggerOption.level && this.loggerOption.level !== 0) return false;
     if (this.loggerOption.level < level) return false;
     return true;
@@ -75,7 +76,7 @@ export class Logger extends BaseLogger {
 
   protected customFormat(
     level: number,
-    pairs: {str: string, style?: string}[],
+    pairs: { str: string; style?: string }[],
     ...data: any[]
   ) {
     if (!this.isLevelAllowed(level)) return;
