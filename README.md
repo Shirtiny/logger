@@ -172,7 +172,7 @@ customLogger.custom("custom message", { data: "any data" });
 import { Logger, css } from "@shirtiny/logger";
 
 class FullCustomerLogger extends Logger {
-  custom = (message: string, ...data: any[]) => {
+  custom2 = (message: string, ...data: any[]) => {
     const level = 4;
     this.formatLog(
       level,
@@ -190,6 +190,34 @@ class FullCustomerLogger extends Logger {
         font-size: 15px;
         font-family: "Trebuchet MS";
       `,
+      ...data,
+    );
+  };
+  
+  custom3 = (message: string, ...data: any[]) => {
+    const level = 4;
+    this.customFormat(
+      level,
+      [
+        {
+        str:  " Custom ",
+        style: css`
+          color: #fff;
+          padding: 2px;
+          background-color: #3f6600;
+          border-radius: 3px;
+          margin-right: 8px;
+        `,
+        },
+        {
+        str:  message,
+        style: css`
+          color: #3f6600;
+          font-size: 15px;
+          font-family: "Trebuchet MS";
+        `,
+        }
+      ]
       ...data,
     );
   };
