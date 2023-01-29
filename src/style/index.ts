@@ -9,7 +9,7 @@ import { Shape, Slider } from "./shape";
 type Text = string | number;
 
 const line = (str?: string) => {
-  return str ? str.replace(/\s*(;|\{|\})+\s*[\n\r]*/g, "$1") : "";
+  return str ? String(str).trim().replace(/\s*(;|\{|\})+\s*[\n]*[\n\r]*/g, "$1") : "";
 };
 
 export const css = (literals: TemplateStringsArray, ...values: Text[]) => {

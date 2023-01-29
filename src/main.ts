@@ -16,3 +16,11 @@ const sh_log = new ShLogger();
 export { theme, ShLogger, css, Logger, LEVELS };
 
 export default sh_log;
+
+const r = css`
+background-color: #292F4C;
+color: white;
+padding: 2px 5px;
+`;
+
+r;
