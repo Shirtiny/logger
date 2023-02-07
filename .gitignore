@@ -6,6 +6,7 @@ tsc
 .DS_Store
 .vscode
 .idea
+.turbo
 pkg
 
 # Log files
