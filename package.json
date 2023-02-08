@@ -1,6 +1,6 @@
 {
   "name": "@shirtiny/logger",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Simple console log with css, write in typescript.",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.es.js",
@@ -28,7 +28,7 @@
     "clean": "shx rm -rf dist build",
     "ts-node": "ts-node",
     "line": "node .node/line.js --files=./dist/main.es.js,./dist/main.browser.js",
-    "build": "npm run clean && npm run build-type && npm run esbuild-node && npm run esbuild-browser && npm run esbuild-esm & npm run line",
+    "build": "npm run clean && npm run build-type && npm run esbuild-node && npm run esbuild-browser && npm run esbuild-esm && npm run line",
     "esbuild-browser": "esbuild src/browser.ts --platform=browser --global-name=ShirtinyLogger --bundle --minify --outfile=dist/main.browser.js",
     "esbuild-browser:dev": "esbuild src/browser.ts --platform=browser --global-name=ShirtinyLogger --bundle  --sourcemap=external --outfile=dist/main.browser.js",
     "esbuild-node": "esbuild src/cli.ts --bundle --platform=node --minify --outfile=dist/cli.js",
