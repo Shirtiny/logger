@@ -76,7 +76,7 @@ export class Logger extends BaseLogger {
 
   protected customFormat(
     level: number,
-    pairs: { str: string; style?: string }[],
+    pairs: ({ str: string; style?: string })[],
     ...data: any[]
   ) {
     if (!this.isLevelAllowed(level)) return;
