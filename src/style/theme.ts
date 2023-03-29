@@ -21,6 +21,8 @@ export enum Colors {
   purple = "#722ed1",
   darkPurple = "#292F4C",
   gray = "#8c8c8c",
+  darkGreen = "#3f6600",
+  cutePurple = "#6a51b2",
 }
 
 export class Theme {

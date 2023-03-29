@@ -33,8 +33,10 @@ export enum LEVELS {
   key = 3,
   interval = 3,
   service = 4,
+  doms = 5,
   api = 5,
   http = 6,
+  component = 6,
   debug = 7,
 }
 
@@ -79,6 +81,18 @@ const logTypes: ILogTypes = {
     title: " Interval :",
     color: Colors.pink,
     level: LEVELS.interval,
+  },
+  doms: {
+    name: "doms",
+    title: " DOM :",
+    color: Colors.darkGreen,
+    level: LEVELS.doms,
+  },
+  component: {
+    name: "component",
+    title: " COM :",
+    color: Colors.cutePurple,
+    level: LEVELS.component,
   },
   warn: {
     name: "warn",
@@ -148,6 +162,23 @@ export class ShLogger extends Logger {
   interval(message: string, ...data: any[]) {
     this.formatShapeLog(logTypes.interval, message, ...data);
   }
+
+  doms = (message: string, ...nodes: any[]) => {
+    this.formatShapeLog(
+      logTypes.doms,
+      message,
+      [...nodes],
+    );
+  };
+
+  component = (componentName: any, message: string, ...data: any[]) => {
+    this.formatShapeLog(
+      logTypes.component,
+      String(componentName),
+      message,
+      ...data,
+    );
+  };
 
   warn(message: string, ...data: any[]) {
     this.formatShapeLog(logTypes.warn, message, ...data);
