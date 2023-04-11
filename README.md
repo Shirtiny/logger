@@ -30,23 +30,48 @@ yarn add @shirtiny/logger
 import logger, { LEVELS } from "@shirtiny/logger";
 import { name, version } from "../package.json";
 
-logger.version(name, version, { level: LEVELS.version });
+const request = () => {
+  return new Promise((r) => {
+    setTimeout(() => {
+      r("ok");
+    }, 300);
+  });
+};
 
-logger.log(
-  "log",
-  { level: LEVELS.log },
-  ", logger default options: ",
-  logger.getLoggerOption(),
-);
+const run = () => {
+  
+  logger.group("logger", () => {
+    
+    logger.version("app-name", "1.1.2", { level: LEVELS.version });
 
-logger.debug("debug message", { level: LEVELS.debug });
-logger.http("req and rep", { level: LEVELS.http });
-logger.api("api message", { level: LEVELS.api });
-logger.service("service data", { level: LEVELS.service });
-logger.interval("interval task", { level: LEVELS.interval });
-logger.key("ENTER", { level: LEVELS.key });
-logger.warn("warnning message", { level: LEVELS.warn });
-logger.error(new Error("error message"), { level: LEVELS.error });
+    logger.log(
+      "log",
+      { level: LEVELS.log },
+      ", logger default options: ",
+      logger.getLoggerOption(),
+    );
+
+    logger.debug("debug message", { level: LEVELS.debug });
+    logger.http("req and rep", { level: LEVELS.http });
+    logger.api("api message", { level: LEVELS.api });
+    logger.service("service data", { level: LEVELS.service });
+    logger.interval("interval task", { level: LEVELS.interval });
+    logger.key("ENTER", { level: LEVELS.key });
+    logger.warn("warnning message", { level: LEVELS.warn });
+    logger.error(new Error("error message"), { level: LEVELS.error });
+    
+  });
+  
+};
+
+logger.timing("run logger test", async (step) => {
+  step("run step start");
+  run();
+  const res = await request();
+  step("run step",["any data"], { res });
+  logger.trace("test for trace", { a: "any data" });
+  step("run step end");
+});
 
 // disable log
 logger.setEnable(false);
@@ -73,15 +98,22 @@ const logger = new ShLogger({
 // logger levels
 enum LEVELS {
   log = 0,
+  trace = 0,
   version = 0,
+  repo = 0,
+  img = 0,
   error = 1,
   warn = 2,
   key = 3,
   interval = 3,
+  group = 4,
   service = 4,
+  doms = 5,
   api = 5,
   http = 6,
+  component = 6,
   debug = 7,
+  timing = 7,
 }
 ```
 
