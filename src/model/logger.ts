@@ -1,5 +1,14 @@
 import { Shape } from "./../style/shape";
-import { BaseLogger, IBaseLoggerOption } from "./baseLogger";
+import {
+  BaseLogger,
+  IBaseLoggerOption,
+  ILogGroup,
+  ILogGroupEnd,
+  ILogTime,
+  ILogTimeStep,
+  ILogTimeEnd,
+  ILogTrace,
+} from "./baseLogger";
 import { Theme } from "./../style/theme";
 import { ILog } from "./baseLogger";
 /*
@@ -9,26 +18,57 @@ import { ILog } from "./baseLogger";
  * @Description:
  */
 
-type LoggerOptionParam = {
+export type TitlePairs = { str: string; style?: string }[];
+
+export type LoggerOptionParam = {
   enable?: boolean;
+
+  // TODO: console adapter console方法由adapter实现
   log?: ILog;
+  logGroup?: ILogGroup;
+  logGroupCollapsed?: ILogGroup;
+  logGroupEnd?: ILogGroupEnd;
+  logTime?: ILogTime;
+  logTimeStep?: ILogTimeStep;
+  logTimeEnd?: ILogTimeEnd;
+  logTrace?: ILogTrace;
+
   level?: number;
   shape?: Shape;
+  isCollapsed?: boolean;
 };
 
-class LoggerOption implements IBaseLoggerOption {
+export class LoggerOption implements IBaseLoggerOption {
   enable?: boolean;
   log?: ILog;
+  logGroup?: ILogGroup;
+  logGroupCollapsed?: ILogGroup;
+  logGroupEnd?: ILogGroupEnd;
+  logTime?: ILogTime;
+  logTimeStep?: ILogTimeStep;
+  logTimeEnd?: ILogTimeEnd;
+  logTrace?: ILogTrace;
   level?: number;
   shape?: Shape;
+  isCollapsed?: boolean;
 
   constructor(param?: LoggerOptionParam) {
     const defaultOptionParam = {
       enable: true,
-      log: (...args: any) => window?.console?.log(...args),
+      log: (...args: any[]) => window?.console?.log(...args),
+      logGroup: (...label: any[]) => window?.console?.group(...label),
+      logGroupCollapsed: (...label: any[]) =>
+        window?.console?.groupCollapsed(...label),
+      logGroupEnd: () => window?.console?.groupEnd(),
+      logTime: (label?: string) => window?.console?.time(label),
+      logTimeStep: (label?: string, ...data: any[]) =>
+        window?.console?.timeLog(label, ...data),
+      logTimeEnd: (label?: string) => window?.console?.timeEnd(label),
+      logTrace: (...data: any[]) => window?.console?.trace(...data),
       // miku!
       level: 39,
       shape: new Theme().shapes.slider,
+      isCollapsed: true,
     };
 
     this.enable =
@@ -36,11 +76,28 @@ class LoggerOption implements IBaseLoggerOption {
         ? param.enable
         : defaultOptionParam.enable;
     this.log = (param && param.log) || defaultOptionParam.log;
+    this.logGroup = (param && param.logGroup) || defaultOptionParam.logGroup;
+    this.logGroupCollapsed =
+      (param && param.logGroupCollapsed) ||
+      defaultOptionParam.logGroupCollapsed;
+    this.logGroupEnd =
+      (param && param.logGroupEnd) || defaultOptionParam.logGroupEnd;
+    this.logTime = (param && param.logTime) || defaultOptionParam.logTime;
+    this.logTimeStep =
+      (param && param.logTimeStep) || defaultOptionParam.logTimeStep;
+    this.logTimeEnd =
+      (param && param.logTimeEnd) || defaultOptionParam.logTimeEnd;
+    this.logTrace = (param && param.logTrace) || defaultOptionParam.logTrace;
+
     this.level =
       param && typeof param.level === "number"
         ? param.level
         : defaultOptionParam.level;
     this.shape = param && param.shape ? param.shape : defaultOptionParam.shape;
+    this.isCollapsed =
+      param && param.isCollapsed
+        ? param.isCollapsed
+        : defaultOptionParam.isCollapsed;
   }
 }
 
@@ -56,7 +113,17 @@ export class Logger extends BaseLogger {
   setLoggerOption(option: object) {
     const newOption: LoggerOption = { ...this.loggerOption, ...option };
     this.loggerOption = newOption;
-    super.baseOption = { enable: newOption.enable, log: newOption.log };
+    super.baseOption = {
+      enable: newOption.enable,
+      log: newOption.log,
+      logGroup: newOption.isCollapsed
+        ? newOption.logGroupCollapsed
+        : newOption.logGroup,
+      logGroupEnd: newOption.logGroupEnd,
+      logTime: newOption.logTime,
+      logTimeEnd: newOption.logTimeEnd,
+      logTrace: newOption.logTrace,
+    };
   }
 
   getLoggerOption() {
@@ -74,15 +141,11 @@ export class Logger extends BaseLogger {
     return true;
   }
 
-  protected customFormat(
-    level: number,
-    pairs: ({ str: string; style?: string })[],
-    ...data: any[]
-  ) {
+  protected customFormat(level: number, pairs: TitlePairs, ...data: any[]) {
     if (!this.isLevelAllowed(level)) return;
     const content = "%c" + pairs.map((p) => p.str).join("%c");
     const descStyles = pairs.map((p) => p.style);
-    super.log(content, ...descStyles, ...data);
+    this.log(content, ...descStyles, ...data);
   }
 
   protected formatLog(
@@ -94,7 +157,45 @@ export class Logger extends BaseLogger {
     ...data: any[]
   ) {
     if (!this.isLevelAllowed(level)) return;
-    super.log(`%c${title}%c${message}`, titleCss, messageCss, ...data);
+    this.log(`%c${title}%c${message}`, titleCss, messageCss, ...data);
+  }
+
+  protected formatGroup(
+    level: number,
+    label: string | TitlePairs,
+    logs: () => void,
+  ) {
+    if (!this.isLevelAllowed(level)) return;
+    if (Array.isArray(label)) {
+      const title = "%c" + label.map((p) => p.str).join("%c");
+      const descStyles = label.map((p) => p.style);
+      this.logGroup(title, ...descStyles);
+    } else {
+      this.logGroup(String(label));
+    }
+
+    logs();
+    this.logGroupEnd();
+  }
+
+  protected async formatTiming(
+    level: number,
+    label: string,
+    logs: (step: (...data: any[]) => void) => any,
+    stepSplit: string = "<---",
+  ) {
+    if (!this.isLevelAllowed(level)) return;
+    this.logTime(label);
+
+    await logs((...data: any[]) => {
+      this.logTimeStep(label, stepSplit, ...data);
+    });
+    this.logTimeEnd(label);
+  }
+
+  protected formatTrace(level: number, ...data: any[]) {
+    if (!this.isLevelAllowed(level)) return;
+    this.logTrace(...data);
   }
 }
 

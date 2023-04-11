@@ -5,7 +5,7 @@
  * @Description:
  */
 import { LEVELS, ShLogger } from "./model/shLogger";
-import { Logger } from "./model/logger";
+import { Logger, LoggerOption, LoggerOptionParam } from "./model/logger";
 import { css } from "./style/index";
 import { Theme } from "./style/theme";
 
@@ -13,6 +13,6 @@ const theme = new Theme();
 
 const sh_log = new ShLogger();
 
-export { theme, ShLogger, css, Logger, LEVELS };
+export { theme, ShLogger, css, Logger, LEVELS, LoggerOption, LoggerOptionParam };
 
 export default sh_log;

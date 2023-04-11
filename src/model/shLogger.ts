@@ -25,6 +25,7 @@ const read = (exec: (reader: FileReader) => void): Promise<any> => {
 
 export enum LEVELS {
   log = 0,
+  trace = 0,
   version = 0,
   repo = 0,
   img = 0,
@@ -32,12 +33,14 @@ export enum LEVELS {
   warn = 2,
   key = 3,
   interval = 3,
+  group = 4,
   service = 4,
   doms = 5,
   api = 5,
   http = 6,
   component = 6,
   debug = 7,
+  timing = 7,
 }
 
 type LogType = {
@@ -164,11 +167,7 @@ export class ShLogger extends Logger {
   }
 
   doms = (message: string, ...nodes: any[]) => {
-    this.formatShapeLog(
-      logTypes.doms,
-      message,
-      [...nodes],
-    );
+    this.formatShapeLog(logTypes.doms, message, [...nodes]);
   };
 
   component = (componentName: any, message: string, ...data: any[]) => {
@@ -178,6 +177,29 @@ export class ShLogger extends Logger {
       message,
       ...data,
     );
+  };
+
+  group = (label: string, logs: () => void) => {
+    this.formatGroup(
+      LEVELS.group,
+      [
+        {
+          str: label,
+          style: css`
+            color: ${Colors.groupBlue};
+          `,
+        },
+      ],
+      logs,
+    );
+  };
+
+  timing = (label: string, logs: (step: (...data: any[]) => void) => any) => {
+    this.formatTiming(LEVELS.timing, label, logs, "|");
+  };
+
+  trace = (...data: any[]) => {
+    this.formatTrace(LEVELS.trace, ...data);
   };
 
   warn(message: string, ...data: any[]) {

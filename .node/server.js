@@ -19,7 +19,7 @@ esbuild
       host: "localhost",
     },
     {
-      entryPoints: [path.resolve(__dirname, "../src/main.ts")],
+      entryPoints: [path.resolve(__dirname, "../src/main.dev.ts")],
       outfile: path.resolve(__dirname, "../dist/main.dev.js"),
       platform: "browser",
       globalName: "bvplayer_core",
