@@ -5,10 +5,10 @@
  * @Description:
  */
 import { LEVELS, ShLogger } from "./model/shLogger";
-import { Logger, LoggerOption, LoggerOptionParam } from "./model/logger";
-import { css } from "./style/index";
-import { Theme } from "./style/theme";
-const theme = new Theme();
+// import { Logger, LoggerOption, LoggerOptionParam } from "./model/logger";
+// import { css } from "./style/index";
+// import { Theme } from "./style/theme";
+// const theme = new Theme();
 
 const logger = new ShLogger();
 
