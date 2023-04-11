@@ -24,22 +24,29 @@ const read = (exec: (reader: FileReader) => void): Promise<any> => {
 };
 
 export enum LEVELS {
-  log = 0,
-  trace = 0,
   version = 0,
   repo = 0,
-  img = 0,
-  error = 1,
-  warn = 2,
+  error = 0,
+
+  warn = 1,
+  interval = 1,
+
+  group = 2,
+  img = 2,
+  log = 2,
+
   key = 3,
-  interval = 3,
-  group = 4,
+
   service = 4,
-  doms = 5,
+
   api = 5,
+  component = 5,
+
   http = 6,
-  component = 6,
+  doms = 6,
+
   debug = 7,
+  trace = 7,
   timing = 7,
 }
 
