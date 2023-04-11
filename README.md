@@ -39,9 +39,8 @@ const request = () => {
 };
 
 const run = () => {
-  
   logger.group("logger", () => {
-    
+  
     logger.version("app-name", "1.1.2", { level: LEVELS.version });
 
     logger.log(
@@ -61,7 +60,6 @@ const run = () => {
     logger.error(new Error("error message"), { level: LEVELS.error });
     
   });
-  
 };
 
 logger.timing("run logger test", async (step) => {
