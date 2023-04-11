@@ -110,7 +110,7 @@ export class Logger extends BaseLogger {
     this.loggerOption = option;
   }
 
-  setLoggerOption(option: object) {
+  setLoggerOption(option: LoggerOption) {
     const newOption: LoggerOption = { ...this.loggerOption, ...option };
     this.loggerOption = newOption;
     super.baseOption = {

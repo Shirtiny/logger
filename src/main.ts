@@ -11,8 +11,14 @@ import { Theme } from "./style/theme";
 
 const theme = new Theme();
 
-const sh_log = new ShLogger();
+export {
+  theme,
+  ShLogger,
+  css,
+  Logger,
+  LEVELS,
+  LoggerOption,
+  LoggerOptionParam,
+};
 
-export { theme, ShLogger, css, Logger, LEVELS, LoggerOption, LoggerOptionParam };
-
-export default sh_log;
+export default new ShLogger();
