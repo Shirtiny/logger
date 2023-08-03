@@ -216,7 +216,7 @@ export class ShLogger extends Logger {
   error = (error: any, ...data: any[]) => {
     this.formatShapeLog(
       logTypes.error,
-      `${error instanceof Error ? error.stack : error}\n`,
+      `${error?.stack || error}\n`,
       ...data,
     );
   };
