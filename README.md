@@ -8,7 +8,7 @@
 
 > simple console log with css, write in typescript.
 
-![preview](https://user-images.githubusercontent.com/49592759/107003893-72ad1d00-67c8-11eb-9d91-afa1353c221d.png)
+![preview](https://file.moetu.org/images/2025/02/11/BC12E1F9-0A2E-4CDA-AD15-7F0A5049EF56069660af6381e65c.png)
 
 ## Installation
 
